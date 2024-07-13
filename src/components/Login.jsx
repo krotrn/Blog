@@ -7,34 +7,33 @@ import { Button, Input, Logo } from './index'
 import { useForm } from 'react-hook-form'
 import authService from '../appwrite/auth'
 
-// Login component definition
+
 function Login() {
-    // Hooks for navigation and dispatch actions
+    
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // useForm hook for handling form submission
+    
     const { register, handleSubmit } = useForm()
-    // Local state for handling errors
+    
     const [error, setError] = React.useState(null)
 
-    // Async function to handle login logic
+    
     const login = async (data) => {
-        console.log(data);
-        setError(null) // Resetting error state
+        setError(null) 
         try {
-            // Attempting to log in with provided credentials
-            const session = await authService.login(data.email, data.password);
+            
+            
+            const session = await authService.login(data);
             if (session) {
-                // If login is successful, fetch user data
-                const userData = await authService.getUserData()
+                
+                const userData = await authService.getCurrentUser()
                 if (userData) {
-                    // Dispatch login action with fetched user data and navigate to home page
+                    
                     dispatch(authLogin(userData))
-                    navigate('/')
                 }
+                navigate('/')
             }
         } catch (error) {
-            // Set error state if login fails
             setError(error.message)
         }
     }
@@ -42,12 +41,12 @@ function Login() {
     // Render method for the Login component
     return (
         <div
-            className='flex items-center justify-center w-full'
+            className='flex items-center justify-center w-full my-8'
         >
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
-                        <Logo width="100%" /> {/* Logo component */}
+                        <Logo width="100%" /> 
                     </span>
                 </div>
 
@@ -59,12 +58,12 @@ function Login() {
                         to="/signup"
                         className="font-medium text-primary transition-all duration-200 hover:underline"
                     >
-                        Sign Up {/* Link to the signup page */}
+                        Sign Up 
                     </Link>
                 </p>
 
-                {error && <p className="text-red-600 mt-8 text-center">{error}</p>} {/* Display error message if any */}
-                {/* Login form */}
+                {error && <p className="text-red-600 mt-8 text-center">{error}</p>} 
+                
                 <form onSubmit={handleSubmit(login)} className='mt-8'>
                     <div className='space-y-5'>
                         <Input
@@ -72,26 +71,26 @@ function Login() {
                             placeholder="Enter your email"
                             type="email"
                             {...register('email', {
-                                required: true,
-                                validate: {
-                                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                                        "Email address must be a valid address", // Email validation
+                                required: "Email is required", 
+                                pattern: { 
+                                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 
+                                  message: "Email address must be a valid address", 
                                 }
-                            })}
+                              })}
                         />
                         <Input
-                            label='password'
+                            label='Password'
                             placeholder='Enter your password'
                             type='password'
                             {...register('password', {
-                                required: 'Password is required' // Password validation
+                                required: 'Password is required' 
                             })}
                         />
 
                         <Button
                             type='submit'
                             className='w-full'
-                        >Sign In</Button> {/* Submit button */}
+                        >Sign In</Button> 
                     </div>
                 </form>
             </div>
@@ -99,4 +98,4 @@ function Login() {
     )
 }
 
-export default Login // Exporting the Login component
+export default Login 

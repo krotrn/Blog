@@ -24,6 +24,7 @@ export default function Protected({ children, authentication = true }) {
         else if(!authentication && authStatus !== authentication) {
             navigate('/')
         }
+        setLoader(false);
 
     // Dependency array to re-run the effect when any of these values change
     },[authStatus, navigate, authentication])

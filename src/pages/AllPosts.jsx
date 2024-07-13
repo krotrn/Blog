@@ -11,7 +11,7 @@ function AllPosts() {
                 setPosts(post.documents)
         })
     }, [])
-
+    
     return (
         <div className='w-full py-8'>
             <Container>
@@ -19,9 +19,7 @@ function AllPosts() {
                     {posts.map((post) => (
                         <div key={post.$id} className='p-2 w-1/4'>
                             <Postcard
-                                $id={post.$id}
-                                title={post.title}
-                                featuredImage={post.featuredImage}
+                                {...post}
                             />
                         </div>
                     ))}

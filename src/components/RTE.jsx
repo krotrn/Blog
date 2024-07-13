@@ -31,10 +31,11 @@ export default function RTE({
                             menubar: true, // Enabling the menu bar
                             plugins: [
                                 // Listing the plugins to include in the editor
-                                "image", "advlist", "autolink", "lists", "link", "image",
+                                "advlist", "autolink", "lists", "link", "image",
                                 "charmap", "preview", "anchor", "searchreplace", "visualblocks",
-                                "code", "fullscreen", "insertdatetime", "media", "table",
-                                "code", "help", "wordcount", "anchor"
+                                "code", "fullscreen", "insertdatetime", "media", "table"
+                                , "help", "wordcount", "paste", "imagetools"
+
                             ],
                             toolbar:
                                 // Configuring the toolbar with various options
