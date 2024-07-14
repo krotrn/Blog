@@ -30,5 +30,5 @@ export default function Protected({ children, authentication = true }) {
     },[authStatus, navigate, authentication])
 
   // Render a loader if loading, otherwise render the children components
-  return loader ? <div>Loading...</div> : <>{children}</>;
+  return loader ? <Loading className='ml-[50%]' color='white' /> : <>{children}</>;
 }

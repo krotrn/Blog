@@ -5,14 +5,12 @@ import { Client, Account, ID } from "appwrite";
  */
 export class AuthService {
   client = new Client();
-  account;
-
+  account
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.account = new Account(this.client);
-
   }
 
   /**

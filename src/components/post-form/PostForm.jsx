@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Input, Select, RTE } from '../index';
+import { Button, Input, Select, RTE, Loading } from '../index';
 import appwriteService from '../../appwrite/config';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -55,7 +55,7 @@ export default function PostForm({ post }) {
       }
     } catch (error) {
       console.log("PostForm :: submit :: error", error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   }
@@ -109,7 +109,7 @@ export default function PostForm({ post }) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={ appwriteService.getFilePreview(post.featuredImage)}
+              src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
@@ -122,7 +122,7 @@ export default function PostForm({ post }) {
           {...register("status", { required: true })}
         />
         <Button type="submit" disabled={loading} bgColor={post ? "bg-green-500" : undefined} className="w-full">
-        {loading ? 'Processing...' : post ? 'Update' : 'Submit'}
+          {loading ? <Loading className='ml-[50%]' color='white' /> : post ? 'Update' : 'Submit'}
         </Button>
       </div>
     </form>

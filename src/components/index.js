@@ -12,6 +12,7 @@ import Postcard from './Postcard.jsx';
 import PostForm from './post-form/PostForm.jsx';
 import AuthLayout from './AuthLayout.jsx';
 import Input from './Input.jsx';
+import Loading from './Loading.jsx';
 
 
 export {
@@ -28,5 +29,6 @@ export {
     Postcard,
     PostForm,
     AuthLayout,
-    Input
+    Input,
+    Loading
 };

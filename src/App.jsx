@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
 import './components'
 import { login, logout } from './store/authSlice'
-import { Footer, Header } from './components'
-import './App.css'
+import { Footer, Header, Loading } from './components'
 import { Outlet } from 'react-router-dom'
 
 function App() {
@@ -32,7 +31,11 @@ function App() {
         <Footer />
       </div>
     </div>
-  ) : null
+  ) : (
+    <div className='flex justify-center items-center min-h-screen'>
+      <Loading />
+    </div>
+  )
 }
 
 export default App

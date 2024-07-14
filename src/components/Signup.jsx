@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Input, Logo } from './index'
+import { Button, Input, Loading, Logo } from './index'
 import { useForm } from 'react-hook-form'
 import authService from '../appwrite/auth'
 import { useDispatch } from 'react-redux'
@@ -84,13 +84,13 @@ function Signup() {
                             type='password'
                             {...register('password', { required: true })}
                         />
-                        
+
                         <Button
                             type='submit'
                             className='w-full'
                             disabled={loading}
                         >
-                            {loading ? 'Processing...' : 'Sign Up'}
+                            {loading ? <Loading className='ml-44' color='white' /> : 'Sign Up'}
                         </Button>
                     </div>
                 </form>

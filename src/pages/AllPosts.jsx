@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Postcard } from '../components'
+import { Container, Loading, Postcard } from '../components'
 import appwriteService from '../appwrite/config'
 
 
@@ -17,9 +17,7 @@ function AllPosts() {
     if (loading) { 
         return (
             <Container>
-                <div className='flex justify-center items-center min-h-96'>
-                    <p>Loading...</p>
-                </div>
+                <Loading className='ml-[50%] h-96' />
             </Container>
         )
     }

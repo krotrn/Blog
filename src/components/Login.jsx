@@ -3,31 +3,31 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
-import { Button, Input, Logo } from './index'
+import { Button, Input, Loading, Logo } from './index'
 import { useForm } from 'react-hook-form'
 import authService from '../appwrite/auth'
 
 
 function Login() {
-    
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
+
     const { register, handleSubmit } = useForm()
-    
+
     const [error, setError] = React.useState(null)
     const [loading, setLoading] = React.useState(false)
 
-    
+
     const login = async (data) => {
         setError(null)
         setLoading(true)
         try {
-            
-            
+
+
             const session = await authService.login(data);
             if (session) {
-                
+
                 const userData = await authService.getCurrentUser()
                 if (userData) {
                     dispatch(authLogin(userData))
@@ -41,7 +41,7 @@ function Login() {
         }
     }
 
-    
+
     return (
         <div
             className='flex items-center justify-center w-full my-8'
@@ -49,7 +49,7 @@ function Login() {
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
-                        <Logo width="100%" /> 
+                        <Logo width="100%" />
                     </span>
                 </div>
 
@@ -61,12 +61,12 @@ function Login() {
                         to="/signup"
                         className="font-medium text-primary transition-all duration-200 hover:underline"
                     >
-                        Sign Up 
+                        Sign Up
                     </Link>
                 </p>
 
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-                
+
                 <form onSubmit={handleSubmit(login)} className='mt-8'>
                     <div className='space-y-5'>
                         <Input
@@ -74,19 +74,19 @@ function Login() {
                             placeholder="Enter your email"
                             type="email"
                             {...register('email', {
-                                required: "Email is required", 
-                                pattern: { 
-                                  value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 
-                                  message: "Email address must be a valid address", 
+                                required: "Email is required",
+                                pattern: {
+                                    value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                                    message: "Email address must be a valid address",
                                 }
-                              })}
+                            })}
                         />
                         <Input
                             label='Password'
                             placeholder='Enter your password'
                             type='password'
                             {...register('password', {
-                                required: 'Password is required' 
+                                required: 'Password is required'
                             })}
                         />
 
@@ -94,7 +94,7 @@ function Login() {
                             type='submit'
                             className='w-full'
                             disabled={loading}
-                        >{loading ? 'Wait...' : 'Login'}</Button> 
+                        >{loading ? <Loading className='ml-44' color='white' /> : 'Login'}</Button>
                     </div>
                 </form>
             </div>
