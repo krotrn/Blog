@@ -54,7 +54,7 @@ export default function PostForm({ post }) {
         }
       }
     } catch (error) {
-      console.log("PostForm :: submit :: error", error);
+      console.log("PostForm :: submit :: error");
     } finally {
       setLoading(false);
     }
