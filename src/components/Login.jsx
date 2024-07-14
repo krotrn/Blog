@@ -16,10 +16,12 @@ function Login() {
     const { register, handleSubmit } = useForm()
     
     const [error, setError] = React.useState(null)
+    const [loading, setLoading] = React.useState(false)
 
     
     const login = async (data) => {
-        setError(null) 
+        setError(null)
+        setLoading(true)
         try {
             
             
@@ -28,17 +30,18 @@ function Login() {
                 
                 const userData = await authService.getCurrentUser()
                 if (userData) {
-                    
                     dispatch(authLogin(userData))
+                    setLoading(false)
                 }
                 navigate('/')
             }
         } catch (error) {
             setError(error.message)
+            setLoading(false)
         }
     }
 
-    // Render method for the Login component
+    
     return (
         <div
             className='flex items-center justify-center w-full my-8'
@@ -62,7 +65,7 @@ function Login() {
                     </Link>
                 </p>
 
-                {error && <p className="text-red-600 mt-8 text-center">{error}</p>} 
+                {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
                 
                 <form onSubmit={handleSubmit(login)} className='mt-8'>
                     <div className='space-y-5'>
@@ -90,7 +93,8 @@ function Login() {
                         <Button
                             type='submit'
                             className='w-full'
-                        >Sign In</Button> 
+                            disabled={loading}
+                        >{loading ? 'Wait...' : 'Login'}</Button> 
                     </div>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select, RTE } from '../index';
 import appwriteService from '../../appwrite/config';
@@ -19,7 +19,9 @@ export default function PostForm({ post }) {
   });
   const navigate = useNavigate()
   const userData = useSelector(state => state.auth.userData)
+  const [loading, setLoading] = useState(false);
   const submit = async (data) => {
+    setLoading(true);
     try {
       if (post) {
         const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
@@ -53,6 +55,8 @@ export default function PostForm({ post }) {
       }
     } catch (error) {
       console.log("PostForm :: submit :: error", error);
+    }finally {
+      setLoading(false);
     }
   }
   const slugTransform = useCallback((value) => {
@@ -117,8 +121,8 @@ export default function PostForm({ post }) {
           className="mb-4"
           {...register("status", { required: true })}
         />
-        <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-          {post ? "Update" : "Submit"}
+        <Button type="submit" disabled={loading} bgColor={post ? "bg-green-500" : undefined} className="w-full">
+        {loading ? 'Processing...' : post ? 'Update' : 'Submit'}
         </Button>
       </div>
     </form>

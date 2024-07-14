@@ -12,8 +12,10 @@ function Signup() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = React.useState(null)
+    const [loading, setLoading] = React.useState(false)
 
     const create = async (data) => {
+        setLoading(true)
         setError(null)
         try {
             const user = await authService.createAccount(data);
@@ -22,12 +24,14 @@ function Signup() {
                 const userData = await authService.getCurrentUser()
                 if (userData) {
                     dispatch(authLogin(userData))
+                    setLoading(false)
                     navigate('/')
                 }
             }
             // }
         } catch (error) {
             setError(error.message)
+            setLoading(false)
         }
     }
 
@@ -84,8 +88,9 @@ function Signup() {
                         <Button
                             type='submit'
                             className='w-full'
+                            disabled={loading}
                         >
-                            Sign Up
+                            {loading ? 'Processing...' : 'Sign Up'}
                         </Button>
                     </div>
                 </form>

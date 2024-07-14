@@ -6,13 +6,24 @@ import appwriteService from '../appwrite/config'
 
 function Home() {
     const [posts, setPosts] = React.useState([])
+    const [loading, setLoading] = React.useState(true)
 
     useEffect(() => {
         appwriteService.getPosts().then((post) => {
             if (post)
                 setPosts(post.documents)
+            setLoading(false)
         })
     }, [])
+    if (loading) {
+        return (
+            <Container>
+                <div className='flex justify-center items-center min-h-96'>
+                    <p>Loading...</p>
+                </div>
+            </Container>
+        )
+    }
 
 
     if (posts.length === 0) {
