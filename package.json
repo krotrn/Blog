@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
     "@tinymce/tinymce-react": "^5.1.1",
+    "@vercel/speed-insights": "^1.0.12",
     "appwrite": "^15.0.0",
     "html-react-parser": "^5.1.10",
     "react": "^18.3.1",

@@ -5,6 +5,7 @@ import './components'
 import { login, logout } from './store/authSlice'
 import { Footer, Header, Loading } from './components'
 import { Outlet } from 'react-router-dom'
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,14 +27,16 @@ function App() {
       <div className='w-full block'>
         <Header />
         <main>
-        <Outlet />
+          <Outlet />
         </main>
         <Footer />
       </div>
+      <SpeedInsights />
     </div>
   ) : (
     <div className='flex justify-center items-center min-h-screen'>
       <Loading />
+      <SpeedInsights />
     </div>
   )
 }
