@@ -51,7 +51,7 @@ function Header() {
               setIsDropdownVisible(!isDropdownVisible)
             }}
           >
-            <img src="/src/assets/menu.webp" alt="Menu" width={'48px'} />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png" alt="Menu" width={'48px'} />
           </button>
         
           <ul className={'hidden sm:flex ml-auto'} >
