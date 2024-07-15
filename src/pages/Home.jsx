@@ -44,7 +44,7 @@ function Home() {
             <Container>
                 <div className='flex flex-wrap'>
                     {posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/4'>
+                        <div key={post.$id} className='p-2 w-1/2 sm:w-1/4'>
                             <Postcard
                                 $id={post.$id}
                                 title={post.title}

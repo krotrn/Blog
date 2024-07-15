@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { Button, Input, Select, RTE, Loading } from '../index';
 import appwriteService from '../../appwrite/config';
 import { useNavigate } from 'react-router-dom';
@@ -20,14 +20,18 @@ export default function PostForm({ post }) {
   const navigate = useNavigate()
   const userData = useSelector(state => state.auth.userData)
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [filled, setFilled ] = useState(false);
   const submit = async (data) => {
     setLoading(true);
+    setError(false);
     try {
       if (post) {
+        setFilled(false);
         const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
 
         if (file) {
-          await appwriteService.deleteFile(post.featuredImage)
+          await appwriteService.deleteFile(post.featuredImage);
         }
 
         const dbPost = await appwriteService.updatePost(post.$id, {
@@ -41,6 +45,7 @@ export default function PostForm({ post }) {
       } else {
         const file = await appwriteService.uploadFile(data.image[0]);
         if (file) {
+          setFilled(true);
           const fileId = file.$id;
           data.featuredImage = fileId;
           const dbPost = await appwriteService.createPost({
@@ -51,10 +56,16 @@ export default function PostForm({ post }) {
           if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
           }
+          else {
+            setError(true);
+          }
+        }
+        else {
+          setError(true);
         }
       }
     } catch (error) {
-      console.log("PostForm :: submit :: error");
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -82,25 +93,27 @@ export default function PostForm({ post }) {
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
-          label="Title :"
+          label="Title* :"
           placeholder="Title"
           className="mb-4"
           {...register("title", { required: true })}
         />
+        {error && <p className="text-red-500">{filled ? "already taken" : "fill the slug"}</p>}
         <Input
-          label="Slug :"
+          label="Slug* :"
           placeholder="Slug"
           className="mb-4"
           {...register("slug", { required: true })}
           onInput={(e) => {
+            setFilled(false);
             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
           }}
         />
-        <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+        <RTE label="Content* :" name="content" control={control} defaultValue={getValues("content")} />
       </div>
       <div className="w-1/3 px-2">
         <Input
-          label="Featured Image :"
+          label="Featured Image* :"
           type="file"
           className="mb-4"
           accept="image/png, image/jpg, image/jpeg, image/gif"

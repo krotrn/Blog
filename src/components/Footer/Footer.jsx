@@ -10,7 +10,7 @@ function Footer() {
           {/* Logo and Copyright */}
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">
             <div className="flex h-full flex-col justify-between">
-              <div className="mb-4 inline-flex items-center">
+              <div className="hidden mb-4 sm:inline-flex items-center">
                 <Logo className = 'bg-cover max-w-sm' />
               </div>
 
