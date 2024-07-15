@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button, Input, Select, RTE, Loading } from '../index';
 import appwriteService from '../../appwrite/config';
 import { useNavigate } from 'react-router-dom';

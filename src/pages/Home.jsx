@@ -30,7 +30,7 @@ function Home() {
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full min-h-96 ">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                            <h1 className="text-2xl font-bold hover:text-[#5f5691]">
                                 Login to read posts
                             </h1>
                         </div>
