@@ -4,14 +4,14 @@ import Logo from '../Logo'
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden py-10 bg-[#222831] border border-t-2 border-t-black">
+    <section className="relative overflow-hidden py-10 bg-[#222831] border-t-2 border-t-black">
       <div className="relative z-10 mx-auto max-w-7xl px-4">
         <div className="-m-6 flex flex-wrap">
           {/* Logo and Copyright */}
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">
             <div className="flex h-full flex-col justify-between">
-              <div className="hidden mb-4 sm:inline-flex items-center">
-                <Logo className = 'bg-cover max-w-sm' />
+              <div className="mb-4 sm:inline-flex items-center ">
+                <Logo className = 'bg-cover max-h-[12rem]' />
               </div>
 
               <div>

@@ -23,29 +23,29 @@ export default function RTE({
                 control={control} // Using the control object provided by react-hook-form
                 // Render prop to render the actual Editor component
                 render={({ field: { onChange } }) => (
-                        <Editor
-                            apiKey='o4paqnlxc19p0r3z7mr4jor841mhzrr1p1gw0q9f8ryl5cuf'
-                            initialValue={defaultValue} // Setting the initial value of the editor
-                            init={{
-                                height: 500, // Setting the height of the editor
-                                menubar: true, // Enabling the menu bar
-                                plugins: [
-                                    // Listing the plugins to include in the editor
-                                    "advlist", "autolink", "lists", "link", "image",
-                                    "charmap", "preview", "anchor", "searchreplace", "visualblocks",
-                                    "code", "fullscreen", "insertdatetime", "media", "table"
-                                    , "help", "wordcount", "paste", "imagetools"
+                    <Editor
+                        apiKey='o4paqnlxc19p0r3z7mr4jor841mhzrr1p1gw0q9f8ryl5cuf'
+                        initialValue={defaultValue} // Setting the initial value of the editor
+                        init={{
+                            height: 500, // Setting the height of the editor
+                            menubar: true, // Enabling the menu bar
+                            plugins: [
+                                // Listing the plugins to include in the editor
+                                "advlist", "autolink", "lists", "link", "image",
+                                "charmap", "preview", "anchor", "searchreplace", "visualblocks",
+                                "code", "fullscreen", "insertdatetime", "media", "table"
+                                , "help", "wordcount", "paste", "imagetools"
 
-                                ],
-                                toolbar:
-                                    // Configuring the toolbar with various options
-                                    "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-                                content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }", // Setting default content styling
-                            }}
-                            onEditorChange={onChange} // Handling editor changes
-                            
-                        /> 
-                
+                            ],
+                            toolbar:
+                                // Configuring the toolbar with various options
+                                "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+                            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }", // Setting default content styling
+                        }}
+                        onEditorChange={onChange} // Handling editor changes
+
+                    />
+
                 )}
             />
         </div>

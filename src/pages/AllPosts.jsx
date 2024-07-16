@@ -17,13 +17,13 @@ function AllPosts() {
     if (loading) { 
         return (
             <Container>
-                <Loading className='ml-[50%] h-96' />
+                <Loading className='ml-[50%] min-h-screen' />
             </Container>
         )
     }
     
     return (
-        <div className='w-full py-8'>
+        <div className='w-full py-8 min-h-screen'>
             <Container>
                 <div className='flex flex-wrap'>
                     {posts.map((post) => (

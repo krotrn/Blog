@@ -19,7 +19,7 @@ function Home() {
     if (loading) {
         return (
             <Container>
-                <Loading className='ml-[50%] h-96' />
+                <Loading className='ml-[50%] min-h-screen' />
             </Container>
         )
     }
@@ -29,7 +29,7 @@ function Home() {
         return (<div className="w-full py-8 mt-4 text-center">
             <Container>
                 <div className="flex flex-wrap">
-                    <div className="p-2 w-full min-h-96 ">
+                    <div className="p-2 w-full min-h-screen ">
                         <h1 className="text-2xl font-bold hover:text-[#5f5691]">
                             No Post available
                         </h1>
@@ -39,7 +39,7 @@ function Home() {
         </div>)
     }
     return (
-        authStatus ? (<div className='w-full py-8'>
+        authStatus ? (<div className='w-full py-8 min-h-screen'>
             <Container>
                 <div className='flex flex-wrap'>
                     {posts.map((post) => (
@@ -57,7 +57,7 @@ function Home() {
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <div className="flex flex-wrap">
-                        <div className="p-2 w-full min-h-96 ">
+                        <div className="p-2 w-full min-h-screen">
                             <h1 className="text-2xl font-bold hover:text-[#5f5691]">
                                 Login to read posts
                             </h1>
