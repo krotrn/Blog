@@ -34,7 +34,7 @@ function App() {
       <SpeedInsights />
     </div>
   ) : (
-    <div className='flex justify-center items-center min-h-screen'>
+    <div className='flex bg-[#232B42] justify-center items-center min-h-screen'>
       <Loading />
       <SpeedInsights />
     </div>
