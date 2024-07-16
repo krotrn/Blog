@@ -21,51 +21,55 @@ export default function PostForm({ post }) {
   const userData = useSelector(state => state.auth.userData)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [filled, setFilled ] = useState(false);
+  let uploadedFileId = null;
   const submit = async (data) => {
     setLoading(true);
     setError(false);
+    uploadedFileId = null;
     try {
       if (post) {
-        setFilled(false);
         const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
 
         if (file) {
+          uploadedFileId = file.$id;
           await appwriteService.deleteFile(post.featuredImage);
         }
 
-        const dbPost = await appwriteService.updatePost(post.$id, {
+        const dbPost = await appwriteService.updatePost(post.$id ,{
           ...data,
           featuredImage: file ? file.$id : undefined
         })
 
-        if (dbPost) {
+        if (!dbPost && uploadedFileId) {
+          await appwriteService.deleteFile(uploadedFileId);
+        } else if (dbPost) {
           navigate(`/post/${dbPost.$id}`)
         }
       } else {
         const file = await appwriteService.uploadFile(data.image[0]);
         if (file) {
-          setFilled(true);
-          const fileId = file.$id;
-          data.featuredImage = fileId;
+          uploadedFileId = file.$id;
+          data.featuredImage = file.$id;
           const dbPost = await appwriteService.createPost({
             ...data,
             userId: userData.$id,
           });
 
-          if (dbPost) {
+          if (!dbPost && uploadedFileId) {
+            await appwriteService.deleteFile(uploadedFileId);
+            setError(true);
+          } else if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
           }
-          else {
-            setError(true);
-          }
-        }
-        else {
+        } else {
           setError(true);
         }
       }
     } catch (error) {
       setError(true);
+      if (uploadedFileId) {
+        await appwriteService.deleteFile(uploadedFileId);
+      }
     } finally {
       setLoading(false);
     }
@@ -90,7 +94,7 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue])
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap text-[#a59bd6] font-medium">
       <div className="w-2/3 px-2">
         <Input
           label="Title* :"
@@ -98,14 +102,15 @@ export default function PostForm({ post }) {
           className="mb-4"
           {...register("title", { required: true })}
         />
-        {error && <p className="text-red-500">{filled ? "already taken" : "fill the slug"}</p>}
+        {error && <p className="text-red-500">{"Slug already taken"}</p>}
         <Input
           label="Slug* :"
           placeholder="Slug"
-          className="mb-4"
-          {...register("slug", { required: true })}
+          className={"mb-4" + (post ? " bg-[#3a3939]" : "")}
+          disabled={post? true : false}
+          {...register("slug", { required: post ? false : true })}
           onInput={(e) => {
-            setFilled(false);
+            setError(false);
             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
           }}
         />

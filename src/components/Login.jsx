@@ -94,7 +94,7 @@ function Login() {
                             type='submit'
                             className='w-full'
                             disabled={loading}
-                        >{loading ? <Loading className='ml-44' color='white' /> : 'Login'}</Button>
+                        >{loading ? <Loading className='ml-[10.5rem]' color='white' /> : 'Login'}</Button>
                     </div>
                 </form>
             </div>

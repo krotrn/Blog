@@ -14,7 +14,7 @@ export default function RTE({
 }) {
     return (
         // Container div for the RTE component
-        <div className='w-full'>
+        <div className='w-full font-medium'>
             {/* Conditionally rendering a label if one is provided */}
             {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
             {/* Using the Controller component from react-hook-form to manage the RTE state */}
