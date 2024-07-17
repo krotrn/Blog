@@ -20,11 +20,9 @@ export default function PostForm({ post }) {
   const navigate = useNavigate()
   const userData = useSelector(state => state.auth.userData)
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   let uploadedFileId = null;
   const submit = async (data) => {
     setLoading(true);
-    setError(false);
     uploadedFileId = null;
     try {
       if (post) {
@@ -57,16 +55,12 @@ export default function PostForm({ post }) {
 
           if (!dbPost && uploadedFileId) {
             await appwriteService.deleteFile(uploadedFileId);
-            setError(true);
           } else if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
           }
-        } else {
-          setError(true);
         }
       }
     } catch (error) {
-      setError(true);
       if (uploadedFileId) {
         await appwriteService.deleteFile(uploadedFileId);
       }
@@ -102,7 +96,6 @@ export default function PostForm({ post }) {
           className="mb-4"
           {...register("title", { required: true })}
         />
-        {error && <p className="text-red-500">{"Slug already taken"}</p>}
         <Input
           label="Slug* :"
           placeholder="Slug"
@@ -110,7 +103,6 @@ export default function PostForm({ post }) {
           disabled={post? true : false}
           {...register("slug", { required: post ? false : true })}
           onInput={(e) => {
-            setError(false);
             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
           }}
         />
