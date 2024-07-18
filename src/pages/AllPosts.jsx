@@ -14,29 +14,29 @@ function AllPosts() {
             setLoading(false)
         })
     }, [])
-    if (loading) { 
+    if (loading) {
         return (
             <Container>
                 <Loading className='ml-[50%] min-h-screen' />
             </Container>
         )
+    } else {
+        return (
+            <div className='w-full py-8 min-h-screen'>
+                <Container>
+                    <div className='flex flex-wrap'>
+                        {posts.map((post) => (
+                            <div key={post.$id} className='p-2 w-1/2 sm:w-1/4'>
+                                <Postcard
+                                    {...post}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </Container>
+            </div>
+        )
     }
-    
-    return (
-        <div className='w-full py-8 min-h-screen'>
-            <Container>
-                <div className='flex flex-wrap'>
-                    {posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/2 sm:w-1/4'>
-                            <Postcard
-                                {...post}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </Container>
-        </div>
-    )
 }
 
 export default AllPosts

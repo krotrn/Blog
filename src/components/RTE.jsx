@@ -30,20 +30,18 @@ export default function RTE({
                             height: 500, // Setting the height of the editor
                             menubar: true, // Enabling the menu bar
                             plugins: [
-                                // Listing the plugins to include in the editor
+                                // Listing the plugins to include in the editor instance
                                 "advlist", "autolink", "lists", "link", "image",
                                 "charmap", "preview", "anchor", "searchreplace", "visualblocks",
-                                "code", "fullscreen", "insertdatetime", "media", "table"
-                                , "help", "wordcount", "paste", "imagetools"
-
+                                "code", "fullscreen", "insertdatetime", "media", "table", "paste",
+                                "help", "wordcount", "paste", "imagetools", "codesample"
                             ],
                             toolbar:
                                 // Configuring the toolbar with various options
                                 "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
                             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }", // Setting default content styling
                         }}
-                        onEditorChange={onChange} // Handling editor changes
-
+                        onEditorChange={onChange} // Handling editor changes with the provided onChange function
                     />
 
                 )}

@@ -27,7 +27,6 @@ function Login() {
 
             const session = await authService.login(data);
             if (session) {
-
                 const userData = await authService.getCurrentUser()
                 if (userData) {
                     dispatch(authLogin(userData))
@@ -56,7 +55,7 @@ function Login() {
                 <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
 
                 <p className="mt-2 text-center text-base text-black/60">
-                    Don&apos;t have any account?&nbsp;
+                    Don&apos;t have any account?;
                     <Link
                         to="/signup"
                         className="font-medium text-primary transition-all duration-200 hover:underline"
