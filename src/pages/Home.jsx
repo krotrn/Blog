@@ -38,7 +38,7 @@ function Home() {
                 </div>
             </Container>
         </div>)
-    } else if (posts.length == 0) {
+    } else if (posts.length === 0) {
         return (<div className="w-full py-8 mt-4 text-center">
             <Container>
                 <div className="flex flex-wrap">
@@ -69,4 +69,4 @@ function Home() {
     }
 }
 
-export default memo(Home)
+export default Home
