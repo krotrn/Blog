@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Container, Loading, Postcard } from '../components'
 import appwriteService from '../appwrite/config'
 
@@ -39,4 +39,4 @@ function AllPosts() {
     }
 }
 
-export default AllPosts
+export default memo(AllPosts)

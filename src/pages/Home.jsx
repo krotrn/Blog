@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Container, Loading, Postcard } from '../components'
 import appwriteService from '../appwrite/config'
 import { useSelector } from 'react-redux'
@@ -38,7 +38,7 @@ function Home() {
                 </div>
             </Container>
         </div>)
-    } else if (posts.length ) {
+    } else if (posts.length == 0) {
         return (<div className="w-full py-8 mt-4 text-center">
             <Container>
                 <div className="flex flex-wrap">
@@ -69,4 +69,4 @@ function Home() {
     }
 }
 
-export default Home
+export default memo(Home)

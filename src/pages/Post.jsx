@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
-import { Button, Container } from "../components";
+import { Button, Container, Loading } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 
@@ -60,8 +60,12 @@ export default function Post() {
                 </div>
                 <div className="browser-css bg-slate-200 rounded-xl font-medium px-4 min-h-72">
                     {parse(post.content)}
-                    </div>
+                </div>
             </Container>
         </div>
-    ) : null;
+    ) : (
+        <Container>
+            <Loading className='ml-[50%] min-h-screen' />
+        </Container>
+    );
 }
