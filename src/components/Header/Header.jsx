@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Container, Logo, LogoutBtn } from '../'
-import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-// #0e062e #130552
+import React, { useState, useMemo, useCallback } from 'react';
+import { Container, Logo, LogoutBtn } from '../';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
   const [mobile, setMobile] = useState(false);
+  console.log("Re-Render Header");
 
-  const navItems = [
+  const navItems = useMemo(() => [
     {
       name: 'Home',
       slug: "/",
@@ -34,7 +35,11 @@ function Header() {
       slug: "/add-post",
       active: authStatus,
     }
-  ]
+  ], [authStatus]);
+
+  const toggleMobile = useCallback(() => {
+    setMobile((prevMobile) => !prevMobile);
+  }, []);
 
   return (
     <header className='py-3 font-medium shadow text-[#988dcc] bg-[#0e062e] sticky'>
@@ -47,9 +52,7 @@ function Header() {
           </div>
           <button
             className={`sm:hidden flex ml-auto`}
-            onClick={() => {
-              setMobile(!mobile)
-            }}
+            onClick={toggleMobile}
           >
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png" alt="Menu" className='bg-cover w-[3rem]' />
           </button>
@@ -99,4 +102,4 @@ function Header() {
   )
 }
 
-export default Header
+export default React.memo(Header);
