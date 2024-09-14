@@ -1,5 +1,4 @@
 import React from 'react'
-import { useId } from 'react'
 
 const Select =  React.forwardRef(function Select({
     options,
@@ -7,7 +6,7 @@ const Select =  React.forwardRef(function Select({
     className = '',
     ...props
 }, ref) {
-    const id = useId();
+    const id = React.useId();
 
     return (
         <div className='w-full'>

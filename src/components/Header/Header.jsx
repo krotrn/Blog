@@ -71,14 +71,16 @@ function Header() {
               </li>
             )}
           </ul>
-        </nav>
         {mobile && (
-            <ul className={`absolute z-30 right-0 mt-2 py-2 w-48 text-[#988dcc] bg-[#0e062e] rounded-lg shadow-xl`} >
+            <ul className={`absolute z-30 right-0 mt-2 py-2 w-48 text-[#988dcc] bg-[#0e062e] rounded-lg shadow-xl transition-opacity duration-300 ease-in-out transform ${mobile ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`} >
             {navItems.map((item) =>
               item.active ? (
                 <li key={item.name}>
                   <button
-                    onClick={() => navigate(item.slug)}
+                    onClick={() => {
+                      navigate(item.slug)
+                      setMobile(false)
+                    }}
                     className='inline-bock px-6 py-2 duration-200 hover:bg-[#032372] rounded-full'
                   >{item.name}</button>
                 </li>
@@ -91,6 +93,7 @@ function Header() {
             )}
             </ul>
           )}
+        </nav>
       </Container>
     </header>
   )

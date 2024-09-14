@@ -27,6 +27,7 @@ function Footer() {
               <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
                 Company
               </h3>
+
               <ul>
                 <li className="mb-4">
                   <Link
@@ -69,6 +70,7 @@ function Footer() {
               <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
                 Support
               </h3>
+              
               <ul>
                 <li className="mb-4">
                   <Link
