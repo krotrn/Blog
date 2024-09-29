@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import  { useState, useMemo, useCallback } from 'react';
 import { Container, Logo, LogoutBtn } from '../';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ function Header() {
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
   const [mobile, setMobile] = useState(false);
-  console.log("Re-Render Header");
 
   const navItems = useMemo(() => [
     {
@@ -102,4 +101,4 @@ function Header() {
   )
 }
 
-export default React.memo(Header);
+export default Header;
