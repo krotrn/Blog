@@ -1,4 +1,4 @@
-import  { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Container, Logo, LogoutBtn } from '../';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -55,7 +55,7 @@ function Header() {
           >
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png" alt="Menu" className='bg-cover w-[3rem]' />
           </button>
-        
+
           <ul className={'hidden sm:flex ml-auto'} >
             {navItems.map((item) =>
               item.active ? (
@@ -73,32 +73,32 @@ function Header() {
               </li>
             )}
           </ul>
-        {mobile && (
+          {mobile && (
             <ul className={`absolute z-30 right-0 mt-2 py-2 w-48 text-[#988dcc] bg-[#0e062e] rounded-lg shadow-xl transition-opacity duration-300 ease-in-out transform ${mobile ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`} >
-            {navItems.map((item) =>
-              item.active ? (
-                <li key={item.name}>
-                  <button
-                    onClick={() => {
-                      navigate(item.slug)
-                      setMobile(false)
-                    }}
-                    className='inline-bock px-6 py-2 duration-200 hover:bg-[#032372] rounded-full'
-                  >{item.name}</button>
+              {navItems.map((item) =>
+                item.active ? (
+                  <li key={item.name}>
+                    <button
+                      onClick={() => {
+                        navigate(item.slug);
+                        setMobile(false);
+                      }}
+                      className='inline-bock px-6 py-2 duration-200 hover:bg-[#032372] rounded-full'
+                    >{item.name}</button>
+                  </li>
+                ) : null
+              )}
+              {authStatus && (
+                <li>
+                  <LogoutBtn />
                 </li>
-              ) : null
-            )}
-            {authStatus && (
-              <li>
-                <LogoutBtn />
-              </li>
-            )}
+              )}
             </ul>
           )}
         </nav>
       </Container>
     </header>
-  )
+  );
 }
 
 export default Header;
