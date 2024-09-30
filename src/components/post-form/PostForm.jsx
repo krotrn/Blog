@@ -88,7 +88,9 @@ const PostForm = ({ post }) => {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className='flex bg-[#232B42] justify-center items-center min-h-screen'>
+      <Loading />
+    </div>}>
       <form onSubmit={handleSubmit(submit)} className="flex flex-wrap text-[#a59bd6] mt-4 font-medium min-h-screen">
         <div className="w-2/3 px-2">
           <Input
