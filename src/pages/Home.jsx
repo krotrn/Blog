@@ -30,10 +30,15 @@ function Home() {
     }
   }, []);
 
-  // Fetch data when component mounts
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    // Fetch data when component mounts
+    useEffect(() => {
+        if (authStatus) {
+            fetchData();
+        }
+        else {
+            setLoading(false);
+        }
+        }, [fetchData, authStatus]);
 
   // Shared Suspense fallback for consistency
   const SuspenseWrapper = ({ children }) => (
@@ -53,23 +58,10 @@ function Home() {
     );
   }
 
-  // Render error message if API call fails
-  if (error) {
-    return (
-      <div className="w-full py-8 mt-4 text-center">
-        <SuspenseWrapper>
-          <Container>
-            <h1 className="text-2xl font-bold text-red-500">Error: {error}</h1>
-          </Container>
-        </SuspenseWrapper>
-      </div>
-    );
-  }
-
   // Render login prompt if user is not authenticated
   if (!authStatus) {
     return (
-      <div className="w-full py-8 mt-4 text-center">
+      <div className="w-full py-8 mt-4 text-center min-h-screen">
         <SuspenseWrapper>
           <Container>
             <h1 className="text-2xl font-bold hover:text-[#5f5691]">
@@ -80,6 +72,19 @@ function Home() {
       </div>
     );
   }
+  // Render error message if API call fails
+  if (error) {
+    return (
+      <div className="w-full py-8 mt-4 text-center min-h-screen">
+        <SuspenseWrapper>
+          <Container>
+            <h1 className="text-2xl font-bold text-red-500">Error: {error}</h1>
+          </Container>
+        </SuspenseWrapper>
+      </div>
+    );
+  }
+
 
   // Render no posts available message if posts array is empty
   if (posts.length === 0) {
