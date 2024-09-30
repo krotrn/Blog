@@ -90,7 +90,7 @@ function Signup() {
                             className='w-full'
                             disabled={loading}
                         >
-                            {loading ? <Loading className='ml-[10.5]' color='white' /> : 'Sign Up'}
+                            {loading ? <Loading className='ml-[10.5rem]' color='white' /> : 'Sign Up'}
                         </Button>
                     </div>
                 </form>
