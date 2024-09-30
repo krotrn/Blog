@@ -42,7 +42,9 @@ function Home() {
 
   // Shared Suspense fallback for consistency
   const SuspenseWrapper = ({ children }) => (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className='flex bg-[#232B42] justify-center items-center min-h-screen'>
+      <Loading />
+    </div>}>
       {children}
     </Suspense>
   );
