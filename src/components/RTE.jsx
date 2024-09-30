@@ -1,5 +1,5 @@
 // Importing necessary libraries and components
-import React, { useState } from 'react'; // React library for building user interfaces
+import { rteApiKey } from '../conf/conf';
 import { Editor } from '@tinymce/tinymce-react'; // TinyMCE React component for rich text editing
 import { Controller } from 'react-hook-form'; // Controller component from react-hook-form for form control
 
@@ -24,7 +24,7 @@ export default function RTE({
                 // Render prop to render the actual Editor component
                 render={({ field: { onChange } }) => (
                     <Editor
-                        apiKey='o4paqnlxc19p0r3z7mr4jor841mhzrr1p1gw0q9f8ryl5cuf'
+                        apiKey={rteApiKey}
                         initialValue={defaultValue} // Setting the initial value of the editor
                         init={{
                             height: 500, // Setting the height of the editor
