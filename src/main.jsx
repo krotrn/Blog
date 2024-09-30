@@ -1,17 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React, { lazy, Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './store/store.js';
 import './index.css'
-import { Provider } from 'react-redux'
-import store from './store/store.js'
-import { AuthLayout, Login } from './components'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import AllPosts from './pages/AllPosts.jsx'
-import AddPost from './pages/AddPost.jsx'
-import EditPost from './pages/EditPost.jsx'
-import Post from './pages/Post.jsx'
-import Signup from './pages/Signup.jsx'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App.jsx';
+import AuthLayout from './components/AuthLayout';
+import Loading from './components/Loading.jsx';
+
+const Home = lazy(() => import('./pages/Home.jsx'));
+const AllPosts = lazy(() => import('./pages/AllPosts.jsx'));
+const AddPost = lazy(() => import('./pages/AddPost.jsx'));
+const EditPost = lazy(() => import('./pages/EditPost.jsx'));
+const Post = lazy(() => import('./pages/Post.jsx'));
+const Signup = lazy(() => import('./pages/Signup.jsx'));
+const Login = lazy(() => import('./components/Login.jsx'));
+
+const ErrorBoundary = ({ children }) => (
+  <Suspense fallback={<div className='flex bg-[#232B42] justify-center items-center min-h-screen'>
+    <Loading />
+  </div>}>
+    {children}
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -22,7 +33,9 @@ const router = createBrowserRouter([
         path: "/",
         element: (
           <AuthLayout authentication={false}>
-            <Home />
+            <ErrorBoundary>
+              <Home />
+            </ErrorBoundary>
           </AuthLayout>
         ),
       },
@@ -30,7 +43,9 @@ const router = createBrowserRouter([
         path: "/login",
         element: (
           <AuthLayout authentication={false}>
-            <Login />
+            <ErrorBoundary>
+              <Login />
+            </ErrorBoundary>
           </AuthLayout>
         ),
       },
@@ -38,7 +53,9 @@ const router = createBrowserRouter([
         path: "/signup",
         element: (
           <AuthLayout authentication={false}>
-            <Signup />
+            <ErrorBoundary>
+              <Signup />
+            </ErrorBoundary>
           </AuthLayout>
         ),
       },
@@ -46,8 +63,9 @@ const router = createBrowserRouter([
         path: "/all-posts",
         element: (
           <AuthLayout authentication>
-            {" "}
-            <AllPosts />
+            <ErrorBoundary>
+              <AllPosts />
+            </ErrorBoundary>
           </AuthLayout>
         ),
       },
@@ -55,8 +73,9 @@ const router = createBrowserRouter([
         path: "/add-post",
         element: (
           <AuthLayout authentication>
-            {" "}
-            <AddPost />
+            <ErrorBoundary>
+              <AddPost />
+            </ErrorBoundary>
           </AuthLayout>
         ),
       },
@@ -64,23 +83,28 @@ const router = createBrowserRouter([
         path: "/edit-post/:slug",
         element: (
           <AuthLayout authentication>
-            {" "}
-            <EditPost />
+            <ErrorBoundary>
+              <EditPost />
+            </ErrorBoundary>
           </AuthLayout>
         ),
       },
       {
         path: "/post/:slug",
-        element: <Post />,
+        element: (
+          <ErrorBoundary>
+            <Post />
+          </ErrorBoundary>
+        ),
       },
     ],
   },
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
