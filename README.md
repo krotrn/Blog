@@ -31,7 +31,7 @@ To get started with this project, follow these steps:
 
 3. **Start the development server**:
     ```sh
-    npm start
+    npm run dev
     ```
 
 ## Usage
